@@ -27,8 +27,8 @@ img_x = 90
 img_y = 70
 img_x1 = random.randint(800,980)
 img_y1 = random.randint(0,620)
-koordinate = random.randint(0,3)
-
+wasd = {0:"UP", 1:"DOWN", 2:"LEFT", 3:"RIGHT"}
+wasd_key = random.rangint(0,3)
 
 def hero():
     global img_x
@@ -53,6 +53,7 @@ def hero():
 def antihero():
     global img_x1
     global img_y1
+    global wasd_key
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_UP]:
