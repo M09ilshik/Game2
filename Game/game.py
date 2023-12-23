@@ -19,9 +19,8 @@ img2 = pygame.image.load("img/demon.png")
 img2_s = pygame.transform.scale(img2, (100, 100))
 sound_stop = pygame.mixer.Sound("Sounds/vzryiv-yadernoy-bombyi.mp3")
 sound_antihero = pygame.mixer.Sound("Sounds/zombi-boretsya-s-chelovekom-leja-na-zemle-30059.mp3")
-sound_hero = pygame.mixer.Sound("Sounds/Звук Шаги по железной лестнице, ботинки, вверх и вниз.mp3")
 
-speed = 0.6
+speed = 1.0
 speed2 = 0.5
 img_x = 90
 img_y = 70
@@ -34,35 +33,28 @@ def hero():
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
         img_y -= speed
-        sound_hero.play()
     elif keys[pygame.K_s]:
         img_y += speed
-        sound_hero.play()
     elif keys[pygame.K_a]:
         img_x -= speed
-        sound_hero.play()
     elif keys[pygame.K_d]:
         img_x += speed
-        sound_hero.play()
-    else:
-        sound_hero.stop()
     screen.blit(img1_s, (img_x, img_y))
 
 def antihero():
     global img_x1
     global img_y1
-    keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_UP]:
+    if img_y + 100 <  img_y1:
         img_y1 -= speed2
         sound_antihero.play()
-    elif keys[pygame.K_DOWN]:
+    elif img_y  >  img_y1 + 100:
         img_y1 += speed2
         sound_antihero.play()
-    elif keys[pygame.K_LEFT]:
+    elif img_x + 100  <  img_x1:
         img_x1 -= speed2
         sound_antihero.play()
-    elif keys[pygame.K_RIGHT]:
+    elif img_x  >  img_x1 + 100:
         img_x1 += speed2
         sound_antihero.play()
     else:
@@ -86,6 +78,15 @@ while True:
         sound_stop.play()
     else:
         pass
+
+    if img_x + 100 > 1080:
+        img_x = 1
+    elif img_x < 0:
+        img_x = 979
+    elif img_y + 100 > 720:
+        img_y = 1
+    elif img_y  < 0:
+        img_y = 619
         
     text = font2.render("Start", True, (0,0,225))
     screen.blit(text, (500, 320))
